@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Embedded Web Components</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <h1>Hello there</h1>
+
+    <div id="app">
+        <!-- output variables -->
+        <h2>{{title}}</h2>
+        <p>{{author}} - {{age}} years old</p>
+
+        <!-- conditional rendering -->
+        <button @click="showButtons = !showButtons">
+            <span v-if="showButtons">Hide buttons</span>
+            <span v-else>Show buttons</span>
+        </button>
+        <br>
+
+        <!-- hides with css -->
+        <hr v-show="showButtons">
+
+        <!-- removes from html -->
+        <div v-if="showButtons">
+            <button v-on:click="age++">increase age</button>
+            <button v-on:click="decreaseAge">decrease age</button>
+            <div @click="title = 'Just Dune'">change book title</div>
+            <div @click="changeTitle('Dune')">change book title</div>
+        </div>
+
+        <!-- attribute binding -->
+        <a v-bind:href="url">wikipedia link</a><br>
+        <a :href="url">wikipedia link 2</a><br>
+
+        <!-- loops -->
+        <h2 v-if="books.length">All books</h2>
+        <ul>
+            <li v-for="book in books" :class="{fav: book.isFav}" @click="book.isFav = !book.isFav">
+                <img width="100px" :src="book.coverUrl" :alt="book.title">
+                <h3>{{book.title}}</h3>
+                <p>{{book.author}}</p>
+            </li>
+        </ul>
+
+        <!-- computed properties -->
+        <h2 v-if="filteredBooks.length">Favorites</h2>
+        <ul>
+            <li v-for="book in filteredBooks" :class="{fav: book.isFav}" @click="book.isFav = !book.isFav">
+                <img width="100px" :src="book.coverUrl" :alt="book.title">
+                <h3>{{book.title}}</h3>
+                <p>{{book.author}}</p>
+            </li>
+        </ul>
+
+        <!-- mouse events -->
+        <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+        <div class="box" @mouseleave="handleEvent">mouseleave</div>
+        <div class="box" @dblclick="handleEvent">double click</div>
+        <div class="box point" @mousemove="handleMousemove">position = {{x}} {{y}}</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
