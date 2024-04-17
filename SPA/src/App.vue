@@ -1,9 +1,24 @@
 <template>
   <h1>{{title}}</h1>
   <div v-if="showModal">
-    <Modal :header="header" :content="text" theme="sale" @close="toggleModal" />
+    <Modal theme="sale" @close="toggleModal" >
+      <template v-slot:links>
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </template>
+      <h1>Givaway!</h1>
+      <p>Get yours before it's too late</p>
+    </Modal>
+  </div>
+  <div v-if="showModal2">
+    <Modal @close="toggleModal2" >
+      <h1>Test</h1>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos necessitatibus veritatis maiores quae vitae.</p>
+    </Modal>
   </div>
   <button @click="toggleModal">open modal</button>
+  <button @click="toggleModal2">open second modal</button>
 </template>
 
 <script>
@@ -14,14 +29,16 @@ export default {
   data () {
     return {
       title: 'Hello there.',
-      header: 'Sign up for Giveaway!',
-      text: "Before it's too late...",
       showModal: false,
+      showModal2: false,
     }
   },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    toggleModal2() {
+      this.showModal2 = !this.showModal2
     }
   },
   components: { Modal }
