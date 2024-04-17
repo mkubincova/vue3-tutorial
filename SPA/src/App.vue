@@ -1,6 +1,7 @@
 <template>
   <h1>{{title}}</h1>
-  <div v-if="showModal">
+  
+  <teleport to="#modals" v-if="showModal">
     <Modal theme="sale" @close="toggleModal" >
       <template v-slot:links>
         <a href="#">Link 1</a>
@@ -10,13 +11,15 @@
       <h1>Givaway!</h1>
       <p>Get yours before it's too late</p>
     </Modal>
-  </div>
-  <div v-if="showModal2">
+  </teleport>
+
+  <teleport to="#modals" v-if="showModal2">
     <Modal @close="toggleModal2" >
       <h1>Test</h1>
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos necessitatibus veritatis maiores quae vitae.</p>
     </Modal>
-  </div>
+  </teleport>
+
   <button @click="toggleModal">open modal</button>
   <button @click="toggleModal2">open second modal</button>
 </template>
