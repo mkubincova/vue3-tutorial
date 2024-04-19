@@ -11,3 +11,26 @@ body {
   margin: 0;
   background: #eee;
 }
+
+.small {
+  font-size: 0.8em;
+  color: #aaa;
+}
+.error {
+  font-size: 0.8em;
+  color: #da0707;
+}
+
+button {
+  background: rgb(3, 90, 230);
+  color: white;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgb(3, 73, 185);
+}
