@@ -1,32 +1,39 @@
 <template>
   <div class="home">
-    <h1>home</h1>
-    <p ref="p">{{ name }}</p>
-    <p>{{ age }}</p>
-    <button @click="handleClick">click me</button>
-    <button @click="age++">Increase age</button>
-    <input type="text" v-model="name">
+    <h1>Home</h1>
+    <h2>Refs</h2>
+    <p>{{ personOne.name }} - {{ personOne.age }}</p>
+    <button @click="updatePersonOne">Update person one</button>
+
+    <h2>Reactive</h2>
+    <p>{{ personTwo.name }} - {{ personTwo.age }} - {{ name2 }}</p>
+    <button @click="updatePersonTwo">Update person two</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 export default {
     name: 'Home',
     setup() {
-      const p = ref(null)
+      const personOne = ref({name: 'Mario', age: 30})
+      const personTwo = reactive({name: 'Luigi', age: 35})
 
-      const name = ref('mario')
-      const age = ref(30)
+      // Reactive values don't work with primitive values
+      const name1 = ref('mario')
+      const name2 = reactive('luigi')
 
-      const handleClick = () => {
-          console.log(p, p.value) // <p>...
-          name.value = 'luigi'
-          age.value = 35
+      const updatePersonOne = () => {
+        personOne.value.age = 40
       }
 
-      return { name, age, handleClick, p }
+      const updatePersonTwo = () => {
+        personTwo.age = 45
+        name2 = 'newname'  // nothing happens
+      }
+
+      return { personOne, personTwo, updatePersonOne, updatePersonTwo, name2 }
     }
 }
 </script>
