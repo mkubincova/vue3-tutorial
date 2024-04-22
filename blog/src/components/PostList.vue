@@ -7,13 +7,22 @@
 </template>
 
 <script>
+import { onMounted, onUnmounted, onUpdated } from 'vue'
 import Post from './Post.vue'
 
 export default {
     props: ['posts'],
     components: { Post },
     setup(props) {
-        console.log(props.posts);
+        onMounted(() => {
+            console.log('component mounter');
+        })
+        onUnmounted(() => {
+            console.log('component unmounted');
+        })
+        onUpdated(() => {
+            console.log('component updated');
+        })
     }
 }
 </script>
